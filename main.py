@@ -1,14 +1,14 @@
 import pygame
 from planet import Planet
 from orbit import Orbit
+import environmet
 
 pygame.init()
 
-caption = 'Sunday'
 size = (1024, 1024)
 FPS = 60
 
-pygame.display.set_caption(caption)
+pygame.display.set_caption(environmet.caption)
 screen = pygame.display.set_mode(size)
 clock = pygame.time.Clock()
 
