@@ -2,14 +2,12 @@ import pygame
 from planet import Planet
 from orbit import Orbit
 import environmet
+import math
 
 pygame.init()
 
-size = (1024, 1024)
-FPS = 60
-
 pygame.display.set_caption(environmet.caption)
-screen = pygame.display.set_mode(size)
+screen = pygame.display.set_mode(environmet.size)
 clock = pygame.time.Clock()
 
 running = True
@@ -22,17 +20,25 @@ def handle_events():
             #running = False
             pygame.quit()
             exit()
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_KP_PLUS:
+                environmet.time_factor += environmet.time_factor_step
+                pygame.math.clamp(environmet.time_factor, 0, 1000)
+            elif event.key == pygame.K_KP_MINUS:
+                environmet.time_factor -= environmet.time_factor_step
+                pygame.math.clamp(environmet.time_factor, 0, 1000)
 
 def draw():
     screen.fill('White')
     for planet in planets:
-        pygame.draw.circle(screen, 'Gray', screen.get_rect().center,planet.orbit.radius, 5)
+        pygame.draw.circle(screen, 'Gray', screen.get_rect().center, planet.orbit.radius, environmet.orbit_line_width)
     planets.draw(screen)
     pygame.display.update()
 
 def update():
-    clock.tick(FPS)
+    clock.tick(environmet.FPS)
     planets.update()
+    pygame.display.set_caption(environmet.caption + ', time factor is ' + str(environmet.time_factor))
 
 planets.add(Planet('sprites/sun.png', (64, 64), Orbit(screen.get_rect().center, 64 * 0), 0))
 planets.add(Planet('sprites/mercury.png', (64, 64), Orbit(screen.get_rect().center, 64 * 1), 4.17))

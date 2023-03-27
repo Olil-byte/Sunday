@@ -20,13 +20,11 @@ class Planet(pygame.sprite.Sprite):
         self.year = 0
 
     def update(self):
-        self.angle += self.speed * environmet.speed_factor
+        self.angle += self.speed * environmet.time_factor
 
         if self.angle >= 2 * math.pi:
             self.year += 1
             self.angle = 0
-            if self.speed == 1:
-                pygame.display.set_caption(environmet.caption + ': ' + str(self.year) + ' earth years')
 
         (x0, y0) = self.orbit.pos
         self.pos.x = x0 + math.cos(self.angle) * self.orbit.radius
