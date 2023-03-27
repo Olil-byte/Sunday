@@ -17,16 +17,15 @@ planets = pygame.sprite.Group()
 def handle_events():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            #running = False
+            running = False
             pygame.quit()
             exit()
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_KP_PLUS:
-                environmet.time_factor += environmet.time_factor_step
-                pygame.math.clamp(environmet.time_factor, 0, 1000)
-            elif event.key == pygame.K_KP_MINUS:
-                environmet.time_factor -= environmet.time_factor_step
-                pygame.math.clamp(environmet.time_factor, 0, 1000)
+
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_KP_PLUS]:
+            environmet.time_factor += environmet.time_factor_step
+        if keys[pygame.K_KP_MINUS]:
+            environmet.time_factor -= environmet.time_factor_step
 
 def draw():
     screen.fill('White')
