@@ -1,6 +1,6 @@
 import pygame
 
 class Orbit:
-    def __init__(self, position, radius):
-        self.position = position
+    def __init__(self, pos: pygame.math.Vector2, radius: float):
+        self.pos = pos
         self.radius = radius
