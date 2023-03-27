@@ -23,9 +23,9 @@ def handle_events():
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_KP_PLUS]:
-            environmet.time_factor += environmet.time_factor_step
+            environmet.time_factor += environmet.time_factor_change_step
         if keys[pygame.K_KP_MINUS]:
-            environmet.time_factor -= environmet.time_factor_step
+            environmet.time_factor -= environmet.time_factor_change_step
 
 def draw():
     screen.fill('White')
