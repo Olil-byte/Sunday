@@ -1,5 +1,6 @@
 import pygame
-from planet import Planet 
+from planet import Planet
+from orbit import Orbit
 
 pygame.init()
 
@@ -13,7 +14,7 @@ clock = pygame.time.Clock()
 
 running = True
 
-planet = Planet('sprites/sun.png', (128, 128))
+planets = pygame.sprite.Group()
 
 def handle_events():
     for event in pygame.event.get():
@@ -23,11 +24,17 @@ def handle_events():
             exit()
 
 def update():
+    planets.update()
+
+def draw():
     screen.fill('White')
-    screen.blit(planet.image, screen.get_rect().center)
+    planets.draw(screen)
     pygame.display.update()
+
+planets.add(Planet('sprites/sun.png', (64, 64), Orbit(screen.get_rect().center, 100)))
 
 while running:
     handle_events()
-    update()
+    draw()
     clock.tick(FPS)
+    update()
