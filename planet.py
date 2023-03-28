@@ -1,5 +1,5 @@
 import pygame
-import environmet
+import environmet as env
 
 from orbit import Orbit
 
@@ -19,8 +19,12 @@ class Planet(pygame.sprite.Sprite):
 
         self.speed = speed
 
+    def draw(self, surface):
+        self.orbit.draw(surface)
+        surface.blit(self.image, self.rect)
+
     def update(self):
-        self.orbital_pos.rotate_ip(self.speed * environmet.time_factor)
+        self.orbital_pos.rotate_ip(self.speed * env.time_factor)
         self.absolute_pos = self.orbit.pos + self.orbital_pos
         self.rect.center = self.absolute_pos
 
