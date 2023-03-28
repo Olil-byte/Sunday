@@ -2,7 +2,7 @@ import pygame
 import environmet as env
 
 class Planet:
-    def __init__(self, sprite_path: str, size: pygame.Rect, speed = 1):
+    def __init__(self, sprite_path: str, size = env.default_planet_sprite_size, speed = 1):
         self.pos = pygame.math.Vector2()
 
         self.image = pygame.image.load(sprite_path).convert_alpha()
