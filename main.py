@@ -1,11 +1,12 @@
 import pygame
+import environmet
+
 from planet import Planet
 from orbit import Orbit
-import environmet
-import math
 
 pygame.init()
 
+pygame.display.set_icon(environmet.icon)
 pygame.display.set_caption(environmet.caption)
 screen = pygame.display.set_mode(environmet.size)
 clock = pygame.time.Clock()
@@ -30,14 +31,14 @@ def handle_events():
 def draw():
     screen.fill('White')
     for planet in planets:
-        pygame.draw.circle(screen, 'Gray', screen.get_rect().center, planet.orbit.radius, environmet.orbit_line_width)
+        pygame.draw.circle(screen, 'DarkGray ', screen.get_rect().center, planet.orbit.radius, environmet.orbital_line_width)
     planets.draw(screen)
     pygame.display.update()
 
 def update():
     clock.tick(environmet.FPS)
     planets.update()
-    pygame.display.set_caption(environmet.caption + ', time factor is ' + str(environmet.time_factor))
+    pygame.display.set_caption("{} (time factor: {})".format(environmet.caption, environmet.time_factor))
 
 planets.add(Planet('sprites/sun.png', (64, 64), Orbit(screen.get_rect().center, 64 * 0), 0))
 planets.add(Planet('sprites/mercury.png', (64, 64), Orbit(screen.get_rect().center, 64 * 1), 4.17))
