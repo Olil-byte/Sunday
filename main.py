@@ -3,15 +3,17 @@ import environmet as env
 
 from planet import Planet
 from orbit import Orbit
+from planetary_system import PlanetarySystem
 
-planets = pygame.sprite.Group()
-planets.add(Planet('sprites/sun.png', (64, 64), Orbit(env.screen.get_rect().center, 64 * 0), 0))
-planets.add(Planet('sprites/mercury.png', (64, 64), Orbit(env.screen.get_rect().center, 64 * 1), 4.17))
-planets.add(Planet('sprites/venus.png', (64, 64), Orbit(env.screen.get_rect().center, 64 * 2), 1.63))
-planets.add(Planet('sprites/earth.png', (64, 64), Orbit(env.screen.get_rect().center, 64 * 3), 1))
-planets.add(Planet('sprites/mars.png', (64, 64), Orbit(env.screen.get_rect().center, 64 * 4), 0.53))
-planets.add(Planet('sprites/jupiter.png', (64, 64), Orbit(env.screen.get_rect().center, 64 * 5), 0.084))
-planets.add(Planet('sprites/saturn.png', (64, 64), Orbit(env.screen.get_rect().center, 64 * 6), 0.034))
+sun_system = PlanetarySystem(env.screen.get_rect().center)
+
+sun_system.append(Planet('sprites/sun.png', (64, 64), 0))
+sun_system.append(Planet('sprites/mercury.png', (64, 64), 4.17))
+sun_system.append(Planet('sprites/venus.png', (64, 64), 1.63))
+sun_system.append(Planet('sprites/earth.png', (64, 64), 1.0))
+sun_system.append(Planet('sprites/mars.png', (64, 64), 0.53))
+sun_system.append(Planet('sprites/jupiter.png', (64, 64), 0.084))
+sun_system.append(Planet('sprites/saturn.png', (64, 64), 0.034))
 
 def handle_events():
     for event in pygame.event.get():
@@ -28,13 +30,12 @@ def handle_events():
 
 def draw():
     env.screen.fill('White')
-    for planet in planets:
-        planet.draw(env.screen)
+    sun_system.draw(env.screen)
     pygame.display.update()
 
 def update():
     env.clock.tick(env.FPS)
-    planets.update()
+    sun_system.update()
     pygame.display.set_caption("{} (time factor: {})".format(env.caption, env.time_factor))
 
 while env.running:
