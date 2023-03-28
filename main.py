@@ -27,6 +27,8 @@ def handle_events():
         env.time_factor += env.time_factor_change_step
     if keys[pygame.K_KP_MINUS]:
         env.time_factor -= env.time_factor_change_step
+    if keys[pygame.K_SPACE]:
+        env.time_factor = env.default_time_factor
 
 def draw():
     env.screen.fill('White')
